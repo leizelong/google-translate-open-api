@@ -14,6 +14,9 @@ export interface Options {
   browers?: boolean,
   browersUrl?: string,
   format?: string,
+  isUserAgent?: boolean,
+  userAgent?: string,
+  client?: string
 }
 
 function translate(value: string | string[], options: Options): Promise<any> {

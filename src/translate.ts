@@ -23,15 +23,16 @@ function handletranslate(data: string[], extra: Options): Promise<any> {
         reject(e);
     });
   }
+  const tld = extra.tld || 'com';
   return translateToken
     .get(data.join(''), {
-      tld: extra.tld || 'com',
+      tld,
       proxy: extra.proxy || false,
     })
     .then(res => {
       const query = {
         anno: 3,
-        client: "webapp",
+        client: extra.client || "t",
         format: extra.format,
         v: 1.0,
         key: null,
@@ -46,17 +47,22 @@ function handletranslate(data: string[], extra: Options): Promise<any> {
         mode: 1
       };
 
+      const headers = {
+        "content-type": "application/x-www-form-urlencoded",
+        "Accept": "application/json, text/plain, */*",
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+
+      if (typeof extra.isUserAgent === 'undefined' || extra.isUserAgent) {
+        headers['User-Agent'] = extra.userAgent ? extra.userAgent : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36';
+      }
+
       const options: AxiosRequestConfig = {
         method: "POST",
-        headers: {
-          "content-type": "application/x-www-form-urlencoded",
-          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36",
-          "Accept": "application/json, text/plain, */*",
-          'X-Requested-With': 'XMLHttpRequest'
-        },
+        headers,
         data: arrayStringify(data),
         url: '/translate_a/t',
-        baseURL: `https://translate.googleapis.com`,
+        baseURL: `https://translate.google.${tld}`,
         params: query,
         proxy: extra.proxy || false,
         ...(extra.config)
