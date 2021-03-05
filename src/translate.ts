@@ -4,6 +4,8 @@ import { arrayStringify } from './util';
 import { Options } from './index';
 import { isSupport, getCode } from './language';
 
+const qs = require('querystring');
+
 function handletranslate(data: string[], extra: Options): Promise<any> {
   let e: any;
   if(extra.from) {
@@ -60,9 +62,11 @@ function handletranslate(data: string[], extra: Options): Promise<any> {
       const options: AxiosRequestConfig = {
         method: "POST",
         headers,
+        // data: qs.stringify(data),
         data: arrayStringify(data),
         url: '/translate_a/t',
-        baseURL: `https://translate.google.${tld}`,
+        // baseURL: `https://translate.google.${tld}`,
+        baseURL: `https://translate.googleapis.com`,
         params: query,
         proxy: extra.proxy || false,
         ...(extra.config)

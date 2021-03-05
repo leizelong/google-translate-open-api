@@ -1,6 +1,6 @@
 {
   "name": "@leizl/google-translate-open-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A free and unlimited API for Google Translate（contains single and multiple） 💵🚫",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -9,6 +9,7 @@
     "build": "tsc && cp src/token.js ./dist",
     "update": "auto-vers -t",
     "test": "nyc mocha test/*.ts",
+    "test:translate": "nyc mocha test/translate.test.ts",
     "cover": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "repository": {
@@ -37,7 +38,7 @@
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "proxy": "^0.2.4",
-    "ts-node": "^8.3.0",
+    "ts-node": "^9.1.1",
     "typescript": "^3.5.3"
   },
   "nyc": {

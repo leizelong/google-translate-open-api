@@ -8,7 +8,7 @@ describe('google-translate-open-api', () => {
       const result = await translate(`I'm fine.`, {
         tld: "cn",
         from: "xxx",
-        to: "zh-CN",
+        to: "zh-cn",
       });
     } catch(e) {
       expect(e.code).to.equal(400);
@@ -27,7 +27,7 @@ describe('google-translate-open-api', () => {
   it('translate single', async () => {
     const result = await translate(`I'm fine.`, {
       tld: "cn",
-      to: "zh-CN",
+      to: "zh-cn",
     });
     const data = result.data[0];
     const compare = '我很好。';
@@ -36,7 +36,7 @@ describe('google-translate-open-api', () => {
   it('translate multiple', async () => {
     const result = await translate([`I'm fine.`, `I'm ok.`], {
       tld: "cn",
-      to: "zh-CN",
+      to: "zh-cn",
     });
     const data = result.data[0];
     const compare = '[[[["我很好。"]],null,"en"],[[["我可以。"]],null,"en"]]';
@@ -45,7 +45,7 @@ describe('google-translate-open-api', () => {
   it('translate parseMultiple', async () => {
     const result = await translate([`I'm fine. And you?`,`I'm ok.`], {
       tld: "cn",
-      to: "zh-CN",
+      to: "zh-cn",
     });
     const data = result.data[0];
     const parseData = parseMultiple(data);
@@ -56,7 +56,7 @@ describe('google-translate-open-api', () => {
   it('translate format text', async () => {
     const result = await translate(`I'm fine. And you?\nI'm fine. And you?`, {
       tld: "cn",
-      to: "zh-CN",
+      to: "zh-cn",
       format: "text",
     });
     const data = result.data[0];
@@ -67,7 +67,7 @@ describe('google-translate-open-api', () => {
   it('translate format html', async () => {
     const result = await translate(`I'm fine. And you?\nI'm fine. And you?`, {
       tld: "cn",
-      to: "zh-CN",
+      to: "zh-cn",
       format: "html",
     });
     const data = result.data[0];
@@ -78,7 +78,7 @@ describe('google-translate-open-api', () => {
   it('translate browers', async () => {
     const result = await translate(`I'm fine.`, {
       tld: "cn",
-      to: "zh-CN",
+      to: "zh-cn",
       browers: true
     });
     const data = result.data[0];
@@ -102,7 +102,7 @@ describe('proxy', () => {
   it('translate proxy', async () => {
     const result = await translate(`I'm fine.`, {
       tld: "cn",
-      to: "zh-CN",
+      to: "zh-cn",
       proxy: {
         host: proxy.host,
         port: proxy.port
