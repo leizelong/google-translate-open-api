@@ -64,3 +64,4 @@ dist
 .nyc_output
 used.md
 test.ts
+yarn.lock
